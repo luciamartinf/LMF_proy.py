@@ -34,6 +34,7 @@ def prep_muscle(output_blast, fasta, input_muscle):
 
     handle.close()
 
+    
     return input_muscle
 
 
@@ -47,6 +48,7 @@ def muscle(input_muscle, align):
     subprocess.run(['muscle', '-in', input_muscle,
                     '-out', align],
                    stderr = subprocess.DEVNULL)
+
 
     return align
 
@@ -65,5 +67,6 @@ def muscle_tree(align, tree):
                     '-cluster', 'neighborjoining'],
                    stderr = subprocess.DEVNULL)
    
+
     return tree
 
