@@ -6,11 +6,13 @@ import sys
 from Bio import Seq
 from Bio import SeqIO
 
-#input = sys.argv[1] #output_blast
-#fasta = sys.argv[2] #PBP1_...
 
 def prep_muscle(output_blast, fasta, input_muscle):
-
+    
+    """
+        
+    """
+    
     handle = open(input_muscle, "w")
 
     with open(fasta, "r") as query_handle:
@@ -46,6 +48,3 @@ def muscle_tree(align, tree):
 
     return tree
 
-#sacar el arbol con phylo
-#prep_muscle(input, fasta)
-#muscle()
