@@ -6,9 +6,9 @@ import re
 def renom(dic, filename, rename):
 	
 	"""
-		Cambia el accession por el nombre común del organismo
-		  	Input = diccionario con el accession y el nombre común de los organismos,
-			fichero que queremos renombrar, nombre del fichero renombrado.
+		Cambia el accession por el nombre común del organismo con la ayuda
+		de un diccionario con el accession y el nombre común de los organismos.
+		El resultado se guarda en un fichero diferente. 
 	"""
 
 	file = open(filename, "r")
@@ -21,5 +21,6 @@ def renom(dic, filename, rename):
 				filetext = filetext.replace(org, dic[org])
 				filetext = filetext.replace("@"," | ")
 		print(filetext, file = f)
+		
 		
 	return rename
