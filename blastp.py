@@ -6,9 +6,6 @@ import sys
 from Bio import Seq
 from Bio import SeqIO
 
-fasta = sys.argv[1] #query
-multifasta = sys.argv[2] #subject
-
 
 def blast(fasta, multifasta, output_blast, coverage=str(50), identity=str(30)):
     
@@ -45,4 +42,5 @@ def blast(fasta, multifasta, output_blast, coverage=str(50), identity=str(30)):
                               stdout = salida)
         awk2.wait()
 
+        
     return output_blast
