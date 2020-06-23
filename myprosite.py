@@ -66,8 +66,7 @@ def search_pattern(dic, input, output):
             for record in SeqIO.parse(input_handle, "fasta"):
                 
                 prot_id = record.id
-                prot_seq = record.seq
-                prot = str(prot_seq)
+                prot = str(record.seq)
 
                 print("\n>"+prot_id+"\n", file = output_handle)
          
