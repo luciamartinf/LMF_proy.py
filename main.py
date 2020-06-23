@@ -12,7 +12,7 @@ from muscle import muscle, prep_muscle, muscle_tree
 from rename import renom
 from myprosite import create_dic_dominios, search_pattern
 import shutil
-
+from help import help
 
 
 def main():
@@ -24,6 +24,8 @@ def main():
     """
     #[1] secuencias_y_... es una carpeta, igual hago que haya una opción para que no se tenga que introducir necesariamente una carpeta y se pueda introducir simplemente un fichero gb
     #[2] PBPs_query.fa
+    carpeta = sys.argv[1]
+    querys = sys.argv[2]
 
     name_proy = input("Nombre del proyecto (sin blancos): ")
     os.mkdir(name_proy)
@@ -37,7 +39,7 @@ def main():
     dic_org = {}
     
     
-    carpeta = sys.argv[1]
+    
 
     for gbks in os.listdir(carpeta): #esto puede ser una función, open_carpeta
         
@@ -51,7 +53,7 @@ def main():
                 pass
             
 
-    querys = sys.argv[2]
+    
 
     with open(querys, "r") as query_handle:  #esto puede ser una función
         
