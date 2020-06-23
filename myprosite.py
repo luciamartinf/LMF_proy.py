@@ -103,9 +103,10 @@ def search_pattern(dic, input, output):
                                     for m in match:
                                         start = m.start()
                                         end = m.end()
+                                        base = m.group()
                                         
-                                        print("\t- Posición: "
-                                              +str(start)+" - "+str(end), 
+                                        print("\t- " + base + " - Posición: "
+                                              + str(start) + " - " + str(end), 
                                               file = output_handle)
                                     
                                     print("", file = output_handle)
