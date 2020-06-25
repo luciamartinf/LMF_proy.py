@@ -27,6 +27,7 @@ def gbk_to_fasta(input_gbk, output_gbk):
 			for feature in record.features:
 
 				if feature.type == 'CDS':
+					
 					try:
 						locus_tag = feature.qualifiers['locus_tag'][0]
 					except:
@@ -37,7 +38,7 @@ def gbk_to_fasta(input_gbk, output_gbk):
 						protein = "NA"
 
 					print(">{}@{}\n{}\n".format(locus_tag, org, protein),
-						  file = fasta)
+					      file = fasta)
 
 
 	return output_gbk
@@ -59,7 +60,7 @@ def create_dic_org(input_gbk, dic_org):
 			description = record.description
 
 			division = description.split(" ")
-			org_name = str(division[0])+" "+str(division[1])
+			org_name = str(division[0]) + " " + str(division[1])
 
 			if not org in dic_org.keys():
 				dic_org[org] = org_name
