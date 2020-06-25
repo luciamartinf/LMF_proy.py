@@ -1,5 +1,6 @@
 #!/usr/bin/env python3.6
 # -*- coding: utf-8 -*-
+# Author: Lucía Martín Fernández, jun 2020
 
 import re
 
@@ -16,10 +17,14 @@ def renom(dic, filename):
 	file.close()
 
 	with open(filename, "w") as f:
+		
 		for org in dic:
+			
 			if re.search(org, filetext):
+				
 				filetext = filetext.replace(org, dic[org])
 				filetext = filetext.replace("@"," | ")
+				
 		print(filetext, file = f)
 		
 
