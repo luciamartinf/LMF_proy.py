@@ -24,9 +24,7 @@ def blast(fasta, multifasta, output_blast, coverage=str(50), identity=str(30)):
 
     with open(output_blast, "w") as salida:
 
-        
-        #Ejecución del BLASTP:
-        
+       
         command_line = ['blastp', '-query', fasta,
                         '-subject', multifasta,
                         '-evalue', '0.00001',
@@ -34,8 +32,6 @@ def blast(fasta, multifasta, output_blast, coverage=str(50), identity=str(30)):
         blastp = subprocess.Popen(command_line,
                                   stdout = subprocess.PIPE)
        
-    
-        #Filtrado por cobertura e identidad:
         
         awk = subprocess.Popen(['/usr/bin/awk','-v','identity=' + identity,
                                 '$2 >= identity {print}'],
