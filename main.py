@@ -1,6 +1,6 @@
 #!/usr/bin/env python3.6
 # -*- coding: utf-8 -*-
-# Lucía Martín Fernández
+# Author: Lucía Martín Fernández, Jun 2020
 
 
 import sys
@@ -47,6 +47,7 @@ def main():
     parser.add_argument("-i", "--identity", help = "Por defecto se define como \
                         30", type=int, default=30)
 
+    
     args = parser.parse_args()
 
     carpeta = args.carpeta
@@ -54,10 +55,12 @@ def main():
     name_proy = args.proyecto
     cov = str(args.coverage)
     ident = str(args.identity)
+    
 
+    
     if name_proy == None:
         name_proy = input("Nombre del proyecto (sin blancos): ")
-
+        
     os.mkdir(name_proy)
 
     results = "{}/resultados".format(name_proy)
