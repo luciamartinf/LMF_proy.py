@@ -8,14 +8,14 @@ from Bio import SeqIO
 
 
 def blast(fasta, multifasta, output_blast, coverage=str(50), identity=str(30)):
-    
+
     """
-        Ejecuta blastp con un evalue predeterminado de 0.00001 
-        Después filtra el resultado con la cobertura y la identidad predeterminadas 
+        Ejecuta blastp con un evalue predeterminado de 0.00001
+        Después filtra el resultado con la cobertura y la identidad predeterminadas
         como 50 y 30 respectivamente aunque pueden ser definidas por el usuario.
         Devuelve un fichero tipo tsv con el resultado del blast que por cada hit con la query incluye:
         - identificador secuencia subject
-        - identidad 
+        - identidad
         - cobertura
         - evalue
         - secuencia subject
@@ -42,5 +42,5 @@ def blast(fasta, multifasta, output_blast, coverage=str(50), identity=str(30)):
                               stdout = salida)
         awk2.wait()
 
-        
+
     return output_blast

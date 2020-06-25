@@ -1,131 +1,172 @@
 #!/usr/bin/env python3.6
 # -*- coding: utf-8 -*-
+# Lucía Martín Fernández
 
 
 import sys
 import os
 from Bio import Seq
 from Bio import SeqIO
-from gbk_fasta import gbk_to_fasta, create_dic_org
+from gbk_fasta import gbk_to_fasta, create_dic_org, lee_carpeta
 from blastp import blast
 from muscle import muscle, prep_muscle, muscle_tree
 from rename import renom
 from myprosite import create_dic_dominios, search_pattern
 import shutil
-from help import help
+from help import carpeta_help, querys_help, helpme
+import argparse
+from distutils.dir_util import copy_tree
 
 
 def main():
-    
+
     """
-        Función principal del proyecto. 
-        Coge de primer argumento el nombre de la carpeta donde se encuentra los genbank 
-        y de segundo argumento el fichero con las query. #puede que este todo en la misma carpeta
+        Función principal del proyecto.
+        Coge de primer argumento el nombre de la carpeta donde se encuentra
+        los genbank y de segundo argumento el fichero con las query.
     """
     #[1] secuencias_y_... es una carpeta, igual hago que haya una opción para que no se tenga que introducir necesariamente una carpeta y se pueda introducir simplemente un fichero gb
     #[2] PBPs_query.fa
-    carpeta = sys.argv[1]
-    querys = sys.argv[2]
+    parser = argparse.ArgumentParser(description = "Este programa sirve para \
+                                     buscar y analizar unas proteínas \
+                                     determinadas query en una serie de \
+                                     genomas bacterianos")
+    parser.add_argument("carpeta", help = "Contiene los genomas bacterianos en \
+                        formato genbank")
+    parser.add_argument("query", help = "Fichero tipo fasta que contiene las \
+                        proteínas que se quieren buscar en los genomas \
+                        bacterianos")
+    parser.add_argument("-p", "--proyecto", help = "Nombre del proyecto \
+                        (sin blancos)")
+    parser.add_argument("-c", "--coverage", help = "Por defecto se define como \
+                        50", type=int, default=50)
+    parser.add_argument("-i", "--identity", help = "Por defecto se define como \
+                        30", type=int, default=30)
 
-    name_proy = input("Nombre del proyecto (sin blancos): ")
+    args = parser.parse_args()
+
+    carpeta = args.carpeta
+    querys = args.query
+    name_proy = args.proyecto
+    cov = str(args.coverage)
+    ident = str(args.identity)
+
+    if name_proy == None:
+        name_proy = input("Nombre del proyecto (sin blancos): ")
+
     os.mkdir(name_proy)
-    
+
     results = "{}/resultados".format(name_proy)
     os.mkdir(results)
 
-    secuencias_fasta = "{}/secuencias.fasta".format(name_proy)
+    data = "{}/data".format(name_proy)
+    os.mkdir(data)
+
+    secuencias_fasta = "{}/secuencias.fasta".format(data)
+
+    help_query = False
+    help_carp = False
+
+    try:
+        dic_org = lee_carpeta(carpeta, secuencias_fasta)
+    except:
+        help_carp = True
+
+
+    if os.path.isfile(secuencias_fasta) == False:
+        help_carp = True
+
+    else:
+        if (os.stat(secuencias_fasta).st_size == 0):
+            help_carp = True
+
+    f = open(querys, "r")
+    if f :
+        lineas = f.read()
+        f.close()
+    else:
+        help_query = True
+
+
+    if lineas[0][0] != ">":
+        help_query = True
+
+
+    if help_carp == True:
+        if help_query == True:
+            carpeta_help(carpeta)
+            querys_help(querys)
+            helpme(parser, name_proy)
+        elif help_query == False:
+            carpeta_help(carpeta)
+            helpme(parser, name_proy)
+    elif help_query == True:
+        querys_help(querys)
+        helpme(parser, name_proy)
+
+    print("Por favor espere, el proceso puede tardar unos minutos")
+
+    copy_tree(carpeta, data)
 
     dic_dominios = create_dic_dominios()
-    dic_org = {}
-    
-    
-    
 
-    for gbks in os.listdir(carpeta): #esto puede ser una función, open_carpeta
-        
-        file = os.path.join(carpeta,gbks)
-        
-        if os.path.isfile(file) == True:
-            try:
-                gbk_to_fasta(file, secuencias_fasta)
-                create_dic_org(file, dic_org)
-            except:
-                pass
-            
 
-    
+    with open(querys, "r") as query_handle:
 
-    with open(querys, "r") as query_handle:  #esto puede ser una función
-        
         for record in SeqIO.parse(query_handle, "fasta"):
-            
+
             seq = record.seq
             id = record.id
-            
+
 
             folder = "{}/{}".format(results, id)
-            
+
             if os.path.isdir(folder) == True:
                 shutil.rmtree(folder, ignore_errors=True)
-                
+
             os.mkdir(folder)
 
-            
+
             query = "{}/{}.fasta".format(folder, id)
-            
+
             with open(query, "w") as q:
-                
+
                 print(">{}\n{}\n".format(id,seq), file = q)
-                
-                
+
+
             output_blast = "{}/blast_{}.tsv".format(folder, id)
-            
-            try:
-                cov = sys.argv[3]
-                ident = sys.argv[4]
-                blast(query, secuencias_fasta, output_blast, cov, ident)
-            except:
-                try:
-                    ident = sys.argv[4]
-                    blast(query, secuencias_fasta, output_blast, ident)
-                except:
-                    try:
-                        cov = sys.argv[3]
-                        blast(query, secuencias_fasta, output_blast, cov)
-                    except:
-                        blast(query, secuencias_fasta, output_blast)
 
-                        
+
+            blast(query, secuencias_fasta, output_blast, cov, ident)
+
+
             input_muscle = "{}/muscle_{}.fa".format(folder, id)
-            prep_muscle(output_blast, query, input_muscle)
-            
-            rename_muscle = "{}/muscle_{}_rn.fa".format(folder, id)
-            renom(dic_org, input_muscle, rename_muscle)
+            prep_muscle(output_blast, query, input_muscle, secuencias_fasta)
 
-            
+
             align = "{}/align_{}.fa".format(folder, id)
             muscle(input_muscle, align)
-            
-            rename_align = "{}/align_{}_rn.fa".format(folder, id)
-            renom(dic_org, align, rename_align)
 
-            
             tree = "{}/tree_{}.nw".format(folder, id)
             muscle_tree(align, tree)
-            
-            rename_tree = "{}/tree_{}_rn.nw".format(folder, id)
-            renom(dic_org, tree, rename_tree)
 
-            
             dominios = "{}/dominios_{}.txt".format(folder, id)
             search_pattern(dic_dominios, input_muscle, dominios)
-            
-            rename_dominios = "{}/dominios_{}_rn.txt".format(folder, id)
-            renom(dic_org, dominios, rename_dominios)
 
-            
-            
-    return rename_dominios
+
+
+            renom(dic_org, input_muscle)
+            renom(dic_org, align)
+            renom(dic_org, tree)
+            renom(dic_org, dominios)
+
+            print(" - Se ha completado el análisis de la proteína " + id)
+
+    shutil.copy(querys, data)
+
+    print("El proceso ha terminado")
+
+    return dominios
 
 
 
