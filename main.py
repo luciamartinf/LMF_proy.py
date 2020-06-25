@@ -25,12 +25,16 @@ def main():
         Coge de primer argumento el nombre de la carpeta donde se encuentra
         los genbank y de segundo argumento el fichero con las query.
     """
-    #[1] secuencias_y_... es una carpeta, igual hago que haya una opción para que no se tenga que introducir necesariamente una carpeta y se pueda introducir simplemente un fichero gb
-    #[2] PBPs_query.fa
+
     parser = argparse.ArgumentParser(description = "Este programa sirve para \
                                      buscar y analizar unas proteínas \
                                      determinadas query en una serie de \
-                                     genomas bacterianos")
+                                     genomas bacterianos",
+                                     epilog = "Se requiere que el archivo \
+                                     \"prosite.dat\" se encuentre en la \
+                                     carpeta desde la que se ejecuta el \
+                                     programa")
+    
     parser.add_argument("carpeta", help = "Contiene los genomas bacterianos en \
                         formato genbank")
     parser.add_argument("query", help = "Fichero tipo fasta que contiene las \
