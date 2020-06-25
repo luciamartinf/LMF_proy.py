@@ -1,5 +1,7 @@
 #!/usr/bin/env python3.6
 # -*- coding: utf-8 -*-
+#Author: Lucía Martín Fernández, jun 2020
+
 
 import subprocess
 import sys
@@ -16,19 +18,24 @@ def prep_muscle(output_blast, fasta, input_muscle, output_gbk):
         el alineamiento con muscle.
         El fichero contiene las secuencias subject que fueron hits del blast
         y la secuencia query.
+        Para introducir las secuencias completas se crea un fichero local
     """
 
     handle = open(input_muscle, "w")
 
 
     with open(fasta, "r") as query_handle:
+        
         for record in SeqIO.parse(query_handle, "fasta"):
             protein_id = record.id
             seq = record.seq
 
-            print(">{}\n{}\n".format(protein_id,seq), file = handle)
+            print(">{}\n{}\n".format(protein_id, seq), file = handle)
 
+    
+    #Para extraer las secuencia completas de los hits del blast
     local = "borra.txt"
+    
     l = open(local, "w")
     subprocess.run(['/usr/bin/awk','{print $1}', output_blast],
                    stdout = l)
@@ -38,13 +45,14 @@ def prep_muscle(output_blast, fasta, input_muscle, output_gbk):
     filetext = l2.read()
     l2.close()
 
+    
     with open(output_gbk, "r") as secuencias:
         for record in SeqIO.parse(secuencias, "fasta"):
             protein_id = record.id
             seq = record.seq
 
             if protein_id in filetext:
-                print(">{}\n{}\n".format(protein_id,seq), file = handle)
+                print(">{}\n{}\n".format(protein_id, seq), file = handle)
 
 
     handle.close()
