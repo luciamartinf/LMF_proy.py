@@ -13,7 +13,7 @@ from muscle import muscle, prep_muscle, muscle_tree
 from rename import renom
 from myprosite import create_dic_dominios, search_pattern
 import shutil
-from help import carpeta_help, querys_help, helpme
+from help import carpeta_help, querys_help, helpme, check_proyecto
 import argparse
 from distutils.dir_util import copy_tree
 
@@ -60,6 +60,8 @@ def main():
     
     if name_proy == None:
         name_proy = input("Nombre del proyecto (sin blancos): ")
+        
+    check_proyecto(name_proy)
         
     os.mkdir(name_proy)
 
