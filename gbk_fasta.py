@@ -1,13 +1,12 @@
 #!/usr/bin/env python3.6
 # -*- coding: utf-8 -*-
+# Author: Lucía Martín Fernández, jun 2020
 
 
 import sys
 from Bio import Seq
 from Bio import SeqIO
 import os
-from help import carpeta_help
-
 
 
 
@@ -70,6 +69,12 @@ def create_dic_org(input_gbk, dic_org):
 
 
 def lee_carpeta(carpeta, secuencias_fasta):
+	
+	"""
+		Lee la carpeta con los genomas bacterianos e intenta 
+		ejecutar las funciones gbk_to_fasta y create_dic_org 
+		por cada genbank que encuentra. 
+	"""
 
 	dic_org = {}
 
