@@ -60,9 +60,9 @@ def check_proyecto(name_proy):
     
     if os.path.isdir(name_proy):
         
-        print("\nYa existe una carpeta con el nombre del proyecto" \
+        print("\nYa existe una carpeta con el nombre del proyecto " \
         "dado anteriormente.")
-        print("Si no desea eliminarla, podrá introducir" \
+        print("Si no desea eliminarla, podrá introducir " \
         "un nombre diferente para el proyecto")
 
         check = input("\n¿Desea eliminar la carpeta existente (s/n)? " )
@@ -71,11 +71,11 @@ def check_proyecto(name_proy):
             shutil.rmtree(name_proy, ignore_errors=True)
             
         elif (check.lower() == "n"):
-            name_proy = input("\nIntroduzca un nombre para el proyecto" \
+            name_proy = input("\nIntroduzca un nombre para el proyecto " \
             "diferente (sin blancos): ")
             check_proyecto(name_proy)
             
         else:
-            print("\nNo se ha introducido una opción válida, por favor" \
+            print("\nNo se ha introducido una opción válida, por favor " \
                   "vuelva a ejecutar el programa")
             sys.exit(1)
