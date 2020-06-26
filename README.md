@@ -2,6 +2,24 @@
 
 Este programa sirve para buscar y analizar unas proteínas determinadas query en una serie de genomas bacterianos.
 
+## USO:
+
+`usage: main.py [-h] [-p PROYECTO] [-c COVERAGE] [-i IDENTITY] carpeta query`
+
+positional arguments:
+  carpeta               Contiene los genomas bacterianos en formato genbank
+  query                 Fichero tipo fasta que contiene las proteínas que se
+                        quieren buscar en los genomas bacterianos
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -p PROYECTO, --proyecto PROYECTO
+                        Nombre del proyecto (sin blancos)
+  -c COVERAGE, --coverage COVERAGE
+                        Por defecto se define como 50
+  -i IDENTITY, --identity IDENTITY
+                        Por defecto se define como 30
+
 ## TAREAS: 
 
 Para ello, realiza una serie de tareas: 
@@ -33,8 +51,4 @@ Por cada proteína query, se van a crear una serie de archivos que se guardarán
 ### Carpeta Data:
 
 Va a copiar los archivos con los genomas bacterianos que se han utilizado para correr el script y el archivo con las proteínas query. Además, también se creará la genoteca tipo fasta con todos los genomas bacterianos. 
-
-# USO:
-
-`usage: main.py [-h] [-p PROYECTO] [-c COVERAGE] [-i IDENTITY] carpeta query`
 
