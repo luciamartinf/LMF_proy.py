@@ -2,19 +2,28 @@
 
 Este programa sirve para buscar y analizar unas proteínas determinadas query en una serie de genomas bacterianos.
 
-## USO:
+### USO:
 
 `usage: main.py [-h] [-p PROYECTO] [-c COVERAGE] [-i IDENTITY] carpeta query`
 
-| **Argumento**                           | **Descripcion´**                                                                                                     |
-|:----------------------------------------|:----------------------------------------------------------------------------------------------------------------|
-|carpeta                                 | Directorio que contiene los genomas bacterianos en formato genbank                                                                      |
-|query                                   | Fichero tipo fasta que contiene las proteíans que se quieren buscar en         los genomas bacterianos                                             |
 
-positional arguments:
-  carpeta               Contiene los genomas bacterianos en formato genbank
-  query                 Fichero tipo fasta que contiene las proteínas que se
-                        quieren buscar en los genomas bacterianos
+#### Argumentos posicionales, obligatorios
+
+| **Argumento**                           | **Descripcion**                                                                                                 |                                                   
+|:----------------------------------------|:----------------------------------------------------------------------------------------------------------------|
+|carpeta                                  | Directorio que contiene los genomas bacterianos en formato genbank                                              |                  
+|query                                    | Fichero tipo fasta que contiene las proteíans que se quieren buscar en los genomas bacterianos                  |                                      
+
+#### Argumentos opcionales 
+
+| **Argumento**                           | **Descripción**                                                                                                 |
+|:----------------------------------------|:----------------------------------------------------------------------------------------------------------------|
+|`-h, --help`                             | Muestra el mensaje de ayuda y termina el proceso                                                                |
+|-p   PROYECTO, --proyecto PROYECTO       | Nombre del proyecto                                                                                             |
+|-c COVERAGE, --coverage COVERAGE         | Por defecto se define como 50                                                                                   |
+|-i IDENTITY,  --identity IDENTITY        | Por defecto se define como 30                                                                                   |
+
+
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -25,7 +34,7 @@ optional arguments:
   -i IDENTITY, --identity IDENTITY
                         Por defecto se define como 30
 
-## TAREAS: 
+### TAREAS: 
 
 Para ello, realiza una serie de tareas: 
 
@@ -35,11 +44,11 @@ Para ello, realiza una serie de tareas:
  
  - Búsqueda de dominios: Encuentra los dominios proteicos presentes en las secuencias obtenidas en el BLASTP.
  
-## FICHEROS Y CARPETAS QUE CREA:  
+### FICHEROS Y CARPETAS QUE CREA:  
 
 Se va a crear una carpeta con el nombre del proyecto que contiene una carpeta "resultados" y una carpeta "data"
 
-### Carpeta Resultados
+#### Carpeta Resultados
 
 Por cada proteína query, se van a crear una serie de archivos que se guardarán dentro de la carpeta "resultados": 
 
@@ -53,7 +62,7 @@ Por cada proteína query, se van a crear una serie de archivos que se guardarán
 
 - dominios_{query}.txt : Fichero de texto con información sobre los dominios de PROSITE encontrados en las secuencias de los hits del BLASTP.
 
-### Carpeta Data:
+#### Carpeta Data:
 
 Va a copiar los archivos con los genomas bacterianos que se han utilizado para correr el script y el archivo con las proteínas query. Además, también se creará la genoteca tipo fasta con todos los genomas bacterianos. 
 
