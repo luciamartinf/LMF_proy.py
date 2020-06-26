@@ -7,15 +7,18 @@ import sys
 import os
 from Bio import Seq
 from Bio import SeqIO
+import shutil
+import argparse
+from distutils.dir_util import copy_tree
+
 from gbk_fasta import gbk_to_fasta, create_dic_org, lee_carpeta
 from blastp import blast
 from muscle import muscle, prep_muscle, muscle_tree
 from rename import renom
 from myprosite import create_dic_dominios, search_pattern
-import shutil
 from help import carpeta_help, querys_help, helpme, check_proyecto
-import argparse
-from distutils.dir_util import copy_tree
+
+
 
 
 def main():
@@ -24,6 +27,8 @@ def main():
         Función principal del proyecto.
         Coge de primer argumento el nombre de la carpeta donde se encuentra
         los genbank y de segundo argumento el fichero con las query.
+        Realiza el control de argumentos a la vez que se van ejecutando 
+        alguna de las funciones de los módulos
     """
 
     parser = argparse.ArgumentParser(description = "Este programa sirve para \
