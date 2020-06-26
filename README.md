@@ -2,6 +2,7 @@
 
 Este programa sirve para buscar y analizar unas proteínas determinadas query en una serie de genomas bacterianos.
 
+## TAREAS: 
 
 Para ello, realiza una serie de tareas: 
 
@@ -11,8 +12,13 @@ Para ello, realiza una serie de tareas:
  
  - Búsqueda de dominios: Encuentra los dominios proteicos presentes en las secuencias obtenidas en el BLASTP.
  
+## FICHEROS Y CARPETAS QUE CREA:  
 
-Por cada proteína query, se van a crear una serie de archivos que se guardarán dentro de la carpeta "resultados" de la carpeta del proyecto:
+Se va a crear una carpeta con el nombre del proyecto que contiene una carpeta "resultados" y una carpeta "data"
+
+### Carpeta Resultados
+
+Por cada proteína query, se van a crear una serie de archivos que se guardarán dentro de la carpeta "resultados": 
 
 - blast_{query}.tsv : El resultado del BLASTP con los datos de evalue, identidad y cobertura además del nombre y secuencia de las proteínas subject
 
@@ -23,3 +29,12 @@ Por cada proteína query, se van a crear una serie de archivos que se guardarán
 - tree_{query}.nw : Árbol filogenético tipo N-J como fichero de texto preparado para ser introducido en programas como iTOL que lo dibujan.
 
 - dominios_{query}.txt : Fichero de texto con información sobre los dominios de PROSITE encontrados en las secuencias de los hits del BLASTP.
+
+### Carpeta Data:
+
+Va a copiar los archivos con los genomas bacterianos que se han utilizado para correr el script y el archivo con las proteínas query. Además, también se creará la genoteca tipo fasta con todos los genomas bacterianos. 
+
+# USO:
+
+`usage: main.py [-h] [-p PROYECTO] [-c COVERAGE] [-i IDENTITY] carpeta query`
+
