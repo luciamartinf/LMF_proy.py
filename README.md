@@ -6,33 +6,22 @@ Este programa sirve para buscar y analizar unas proteínas determinadas query en
 
 `usage: main.py [-h] [-p PROYECTO] [-c COVERAGE] [-i IDENTITY] carpeta query`
 
-
 #### Argumentos posicionales, obligatorios
 
 | **Argumento**                           | **Descripcion**                                                                                                 |                                                   
 |:----------------------------------------|:----------------------------------------------------------------------------------------------------------------|
-|carpeta                                  | Directorio que contiene los genomas bacterianos en formato genbank                                              |                  
-|query                                    | Fichero tipo fasta que contiene las proteíans que se quieren buscar en los genomas bacterianos                  |                                      
+|`carpeta`                                | Directorio que contiene los genomas bacterianos en formato genbank                                              |                  
+|`query`                                  | Fichero tipo fasta que contiene las proteíans que se quieren buscar en los genomas bacterianos                  |                                      
 
 #### Argumentos opcionales 
 
 | **Argumento**                           | **Descripción**                                                                                                 |
 |:----------------------------------------|:----------------------------------------------------------------------------------------------------------------|
 |`-h, --help`                             | Muestra el mensaje de ayuda y termina el proceso                                                                |
-|-p   PROYECTO, --proyecto PROYECTO       | Nombre del proyecto                                                                                             |
-|-c COVERAGE, --coverage COVERAGE         | Por defecto se define como 50                                                                                   |
-|-i IDENTITY,  --identity IDENTITY        | Por defecto se define como 30                                                                                   |
+|`-p   PROYECTO, --proyecto PROYECTO`     | Nombre del proyecto                                                                                             |
+|`-c COVERAGE, --coverage COVERAGE`       | Por defecto se define como 50                                                                                   |
+|`-i IDENTITY,  --identity IDENTITY`      | Por defecto se define como 30                                                                                   |
 
-
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -p PROYECTO, --proyecto PROYECTO
-                        Nombre del proyecto (sin blancos)
-  -c COVERAGE, --coverage COVERAGE
-                        Por defecto se define como 50
-  -i IDENTITY, --identity IDENTITY
-                        Por defecto se define como 30
 
 ### TAREAS: 
 
@@ -65,4 +54,12 @@ Por cada proteína query, se van a crear una serie de archivos que se guardarán
 #### Carpeta Data:
 
 Va a copiar los archivos con los genomas bacterianos que se han utilizado para correr el script y el archivo con las proteínas query. Además, también se creará la genoteca tipo fasta con todos los genomas bacterianos. 
+
+### INSTALACIÓN: 
+
+Requiere la instalación de BLAST y BIOPYTHON
+
+### OTROS:
+
+Se requiere la presencia del fichero "prosite.dat" en la carpeta desde la que se ejecuta el programa
 
