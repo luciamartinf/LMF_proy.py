@@ -30,7 +30,11 @@ def main():
         Realiza el control de argumentos a la vez que se van ejecutando 
         alguna de las funciones de los módulos
     """
-
+    
+    
+    #CONTROL DE ARGUMENTOS:
+    
+    
     parser = argparse.ArgumentParser(description = "Este programa sirve para \
                                      buscar y analizar unas proteínas \
                                      determinadas query en una serie de \
@@ -61,13 +65,17 @@ def main():
     cov = str(args.coverage)
     ident = str(args.identity)
     
-
+    
+     
+    #Control de argumento name_proy
     
     if name_proy == None:
         name_proy = input("Nombre del proyecto (sin blancos): ")
         
     check_proyecto(name_proy)
         
+    #Creación de carpetas:
+    
     os.mkdir(name_proy)
 
     results = "{}/resultados".format(name_proy)
@@ -77,35 +85,44 @@ def main():
     os.mkdir(data)
 
     secuencias_fasta = "{}/secuencias.fasta".format(data)
+    
+    
+    #CONTROL DE ARGUMENTOS CARPETA Y QUERY
 
     help_query = False
     help_carp = False
+    
+    
+    #Control de argumento carpeta
 
     try:
         dic_org = lee_carpeta(carpeta, secuencias_fasta)
     except:
         help_carp = True
-
-
+        
     if os.path.isfile(secuencias_fasta) == False:
         help_carp = True
-
     else:
         if (os.stat(secuencias_fasta).st_size == 0):
             help_carp = True
-
+            
+            
+    #Control de argumento query
+    
     f = open(querys, "r")
+    
     if f :
         lineas = f.read()
         f.close()
     else:
         help_query = True
 
-
     if lineas[0][0] != ">":
         help_query = True
+        
 
-
+    #Ejecución de comandos de ayuda: 
+    
     if help_carp == True:
         if help_query == True:
             carpeta_help(carpeta)
@@ -117,13 +134,16 @@ def main():
     elif help_query == True:
         querys_help(querys)
         helpme(parser, name_proy)
+        
 
     print("Por favor espere, el proceso puede tardar unos minutos")
+    
 
     copy_tree(carpeta, data)
 
     dic_dominios = create_dic_dominios()
 
+    
 
     with open(querys, "r") as query_handle:
 
@@ -168,17 +188,22 @@ def main():
             search_pattern(dic_dominios, input_muscle, dominios)
 
 
-
             renom(dic_org, input_muscle)
             renom(dic_org, align)
             renom(dic_org, tree)
             renom(dic_org, dominios)
 
+            
             print(" - Se ha completado el análisis de la proteína " + id)
+            
 
+            
     shutil.copy(querys, data)
+    
 
     print("El proceso ha terminado")
+    
+    
 
     return dominios
 
