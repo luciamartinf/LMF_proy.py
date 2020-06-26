@@ -136,6 +136,7 @@ def main():
         helpme(parser, name_proy)
         
 
+    print("Los argumentos introducidos son correctos")
     print("Por favor espere, el proceso puede tardar unos minutos")
     
 
