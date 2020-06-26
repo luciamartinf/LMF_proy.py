@@ -6,6 +6,11 @@ Este programa sirve para buscar y analizar unas proteínas determinadas query en
 
 `usage: main.py [-h] [-p PROYECTO] [-c COVERAGE] [-i IDENTITY] carpeta query`
 
+| **Argumento**                           | **Descripcion´**                                                                                                     |
+|:----------------------------------------|:----------------------------------------------------------------------------------------------------------------|
+|carpeta                                 | Directorio que contiene los genomas bacterianos en formato genbank                                                                      |
+|query                                   | Fichero tipo fasta que contiene las proteíans que se quieren buscar en         los genomas bacterianos                                             |
+
 positional arguments:
   carpeta               Contiene los genomas bacterianos en formato genbank
   query                 Fichero tipo fasta que contiene las proteínas que se
