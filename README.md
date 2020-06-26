@@ -25,7 +25,7 @@ Este programa sirve para buscar y analizar unas proteínas determinadas query en
 
 ### TAREAS: 
 
-Para ello, realiza una serie de tareas: 
+Para este análisis, realiza una serie de tareas: 
 
  - BLASTP: Va a comparar las secuencias de nuestras proteínas con las proteínas de los genomas bacterianos. De esta forma, obtendremos como resultado solo aquellas proteínas del genoma que tienen una cierta similitud con la proteína query.
  
