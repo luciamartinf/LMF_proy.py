@@ -84,7 +84,7 @@ def main():
     data = "{}/data".format(name_proy)
     os.mkdir(data)
 
-    secuencias_fasta = "{}/secuencias.fasta".format(data)
+    secuencias_fasta = "{}/genoteca_{}.fasta".format(data, name_proy)
     
     
     #CONTROL DE ARGUMENTOS CARPETA Y QUERY
