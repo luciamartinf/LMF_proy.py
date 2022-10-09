@@ -1,6 +1,6 @@
 # LMF_proy.py
 
-Este programa sirve para buscar y analizar unas proteínas determinadas query en una serie de genomas bacterianos.
+Este programa sirve para buscar y analizar unas proteínas query en una serie de genomas bacterianos.
 
 ### USO:
 
